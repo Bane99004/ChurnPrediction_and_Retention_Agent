@@ -32,3 +32,4 @@ def add_cols(df):
   
   df["Total Services"] = (df[services] == "Yes").sum(axis=1).astype(str)
   return df
+

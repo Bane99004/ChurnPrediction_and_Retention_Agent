@@ -1,17 +1,17 @@
-from fastapi import HttpException, Depends, status, APIRouter
+from fastapi import HTTPException, Depends, status, APIRouter
 import logging
 from monitoring.drift_report import monitor_model_drift
 
-logging.Basicconfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-route  = APIRouter()
+router  = APIRouter()
 
-@router.get()
+@router.get('/')
 def model_drift_monitoring():
   try:
     result = monitor_model_drift()
     return result
   except Exception as e:
     logger.error(f"Model monitoring failed: {e}")
-    raise HttpException(status=500, detail=e)
+    raise HTTPException(status=500, detail=e)
   

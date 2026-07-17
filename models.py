@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, validator
-
+from typing import Optional
 def CustomerRequest(BaseModel):
   customerID : str = Field(..., min_length=1, max_length=50)
   churnProbabilty : float = Field(..., ge=0.0, le=1.0)

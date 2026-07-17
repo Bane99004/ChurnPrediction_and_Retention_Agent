@@ -31,10 +31,10 @@ prompt = ChatPromptTemplate.from_messages([
 ])
 agent = create_tool_calling_agent(llm, tools, prompt)
 executor = AgentExecutor(agent=agent, tools=tools, verbose=True, max_iterations=6, handle_parsing_errors=True)
-async def main():
-  result = await executor.ainvoke({
-    "input": "Customer C001 hasn't logged in for 3 weeks. Should we reach out?"
-  })
-  print(result['output'])
+# async def main():
+#   result = await executor.ainvoke({
+#     "input": "Customer C001 hasn't logged in for 3 weeks. Should we reach out?"
+#   })
+#   print(result['output'])
 
-asyncio.run(main())
+# asyncio.run(main())

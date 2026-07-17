@@ -86,7 +86,6 @@ async def draft_retention_email(complete_customer_details: str, decision_json: s
   customer = json.loads(complete_customer_details)
   decision = json.loads(decision_json)
   ev = json.loads(expected_value)
-  print(customer)
   print(ev)
   print(decision)
   result = llm_reasoning_for_email(customer, decision, ev)
@@ -101,13 +100,16 @@ async def check_model_drift() -> str:
   return json.dumps(results)
 
 @tool
-async def log_completed_action(customer_id:str, action: str, email_sent:bool, review_required: bool, ev: float):
+async def log_completed_action(complete_customer_details :str, action: str, email_sent:bool, review_required: bool, ev: float):
   """Log a completed agent action to the database.
   ALWAYS call this after taking any action - this is the audit trail."""
+  customer= json.loads(complete_customer_details)
+  customer_id=customer['CustomerID']
   await log_agent_interaction(customer_id=customer_id,
-      churn_probability=churn_prob,
+      churn_probability=customer['churn_probability'],
       action=action,
       email_sent=email_sent,
       review_required=review_required,
       ev=ev)
+  
   return json.dumps({"logged": True, "customer_id": customer_id, "action": action})

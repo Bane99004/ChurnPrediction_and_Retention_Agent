@@ -6,6 +6,7 @@ class ChurnDecisionEngine:
   
   def __init__(self, model_path=MODEL_PATH):
     self.model = xgb.XGBClassifier()
+    self.model._estimator_type = "classifier"
     self.model.load_model(model_path)
   
   def predict_churn_risk(self, customer_features: pd.DataFrame) -> dict:
