@@ -18,5 +18,4 @@ COPY . .
 EXPOSE 8000
 
 #Run the api
-CMD ["uvicorn", "api.app:app", "--host", "0.0.0.0", "--port", "8000"]
-
+CMD ["sh", "-c", "exec uvicorn api.app:app --host 0.0.0.0 --port ${PORT}"]
