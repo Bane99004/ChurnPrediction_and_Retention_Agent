@@ -3,6 +3,6 @@
 __pycache__/
 *.pyc
 .DS_store
-models/*.json
+
 *.json
 own_space
